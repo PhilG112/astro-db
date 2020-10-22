@@ -10,13 +10,7 @@ namespace Astro.DbUp
     {
         public static void Main(string[] args)
         {
-            var config = new ConfigurationBuilder()
-                .SetBasePath(Directory.GetCurrentDirectory())
-                .AddUserSecrets(Assembly.GetExecutingAssembly())
-                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
-                .Build();
-
-            var connString = config.GetConnectionString("Astro");
+            var connString = Environment.GetEnvironmentVariable("ConnectionString");
 
             EnsureDatabase.For.SqlDatabase(connString);
 
